@@ -135,7 +135,7 @@ def pipeline_regresion(df):
     # Discount Applied se convierte a 0/1 antes de escalar ya que es booleano
     df_auto = df.copy()
 
-    X = df_auto[['Category', 'Item', 'Payment Method', 'Location','Discount Applied', 'Price Per Unit', 'Quantity', 'Timestamp']]
+    X = df_auto[['Category', 'Item', 'Payment Method', 'Location', 'Discount Applied', 'Quantity', 'Timestamp']]
     y = df_auto['Total Spent']
 
     X = X.copy()
@@ -144,8 +144,7 @@ def pipeline_regresion(df):
     pipeline = ColumnTransformer(transformers=[
         ('cat', OneHotEncoder(handle_unknown='ignore'),
          ['Category', 'Item', 'Payment Method', 'Location']),
-        ('num', StandardScaler(),
-         ['Discount Applied', 'Price Per Unit', 'Quantity', 'Timestamp'])
+        ('num', StandardScaler(), ['Discount Applied', 'Quantity', 'Timestamp'])
     ])
 
     X_transf = pipeline.fit_transform(X)
